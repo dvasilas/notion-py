@@ -287,7 +287,7 @@ class CollectionQuery(object):
         search="",
         type="table",
         aggregate=[],
-        filter=[],
+        filters=[],
         filter_operator="and",
         sort=[],
         calendar_by="",
@@ -298,7 +298,7 @@ class CollectionQuery(object):
         self.search = search
         self.type = type
         self.aggregate = _normalize_query_list(aggregate, collection)
-        self.filter = _normalize_query_list(filter, collection)
+        self.filters = _normalize_query_list(filters, collection)
         self.filter_operator = filter_operator
         self.sort = _normalize_query_list(sort, collection)
         self.calendar_by = _normalize_property_name(calendar_by, collection)
@@ -317,7 +317,7 @@ class CollectionQuery(object):
                 search=self.search,
                 type=self.type,
                 aggregate=self.aggregate,
-                filter=self.filter,
+                filters=self.filters,
                 filter_operator=self.filter_operator,
                 sort=self.sort,
                 calendar_by=self.calendar_by,

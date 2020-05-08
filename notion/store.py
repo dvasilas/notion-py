@@ -301,7 +301,8 @@ class RecordStore(object):
         search="",
         type="table",
         aggregate=[],
-        filter=[],
+        aggregations=[],
+        filters=[],
         filter_operator="and",
         sort=[],
         calendar_by="",
@@ -311,8 +312,10 @@ class RecordStore(object):
         # convert singletons into lists if needed
         if isinstance(aggregate, dict):
             aggregate = [aggregate]
+        if isinstance(aggregations, dict):
+            aggregations = [aggregations]
         if isinstance(filter, dict):
-            filter = [filter]
+            filters = [filters]
         if isinstance(sort, dict):
             sort = [sort]
 
@@ -322,15 +325,19 @@ class RecordStore(object):
             "loader": {
                 "limit": 10000,
                 "loadContentCover": True,
-                "query": search,
+                "searchQuery": search,
                 "userLocale": "en",
                 "userTimeZone": str(get_localzone()),
                 "type": type,
             },
             "query": {
                 "aggregate": aggregate,
-                "filter": filter,
-                "filter_operator": filter_operator,
+                "aggregations": aggregations,
+                "filter": {
+                    "filters": filters,
+                    "operator": filter_operator,
+                },
+                "group_by": group_by,
                 "sort": sort,
             },
         }
